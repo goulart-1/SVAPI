@@ -1,0 +1,9 @@
+Este é um arquivo de exemplo criado via API do GitHub.
+
+Você pode usar a API para:
+- Criar novos arquivos
+- Atualizar arquivos existentes
+- Gerenciar branches
+- E muito mais!
+
+Criado em: 2026-10-01
