@@ -1,20 +1,69 @@
-# SVAPI
+# SVAPI - Setup Rápido
 
-Aplicação Next.js com App Router, autenticação Supabase e deploy preparado para Vercel.
+**Aplicação Next.js 14** com autenticação Supabase, módulos de produtos e usuários, pronta para Vercel.
 
-## Desenvolvimento
+## 📋 Quick Start
 
 ```bash
+# 1. Clonar e instalar
+git clone https://github.com/goulart-1/SVAPI.git
+cd SVAPI
 npm install
+
+# 2. Configurar variáveis de ambiente
 cp .env.example .env.local
+# Edite .env.local com suas credenciais do Supabase
+
+# 3. Executar localmente
 npm run dev
+# Abra http://localhost:3000
 ```
 
-Configure `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` no `.env.local` ou nas Environment Variables da Vercel. Nunca exponha `SUPABASE_SERVICE_ROLE_KEY` no cliente.
+## 🔗 Endpoints da API
 
-## Verificação
+| Método | Rota | Descrição |
+|--------|------|----------|
+| GET | `/api/health` | Health check |
+| GET/POST | `/api/products` | Listar/criar produtos |
+| GET/PATCH/DELETE | `/api/products/:id` | Detalhes/editar/deletar produto |
+| GET/PATCH | `/api/users` | Perfil/atualizar usuário |
 
-- `GET /api/health` confirma que a aplicação está respondendo.
-- `/login` testa cadastro e login do Supabase.
-- `/dashboard` é protegido pelo middleware e exige uma sessão válida.
-- `npm run build` valida a compilação de produção.
+## 🌐 Páginas
+
+- `/login` - Autenticação (signup/signin)
+- `/dashboard` - Dashboard principal (protegido)
+- `/products` - Gerenciar produtos (protegido)
+- `/users` - Editar perfil (protegido)
+
+## 🚀 Deploy
+
+Ver guia completo em: `docs/SETUP_PRODUCTION.md`
+
+## 📚 Estrutura
+
+```
+src/
+├── app/
+│   ├── api/           # API routes
+│   ├── login/         # Autenticação
+│   ├── dashboard/     # Dashboard
+│   ├── products/      # Módulo de produtos
+│   └── users/         # Módulo de usuários
+├── lib/
+│   └── supabase/      # Clientes Supabase
+└── middleware.ts      # Proteção de rotas
+```
+
+## 🔐 Segurança
+
+- RLS (Row Level Security) ativado no Supabase
+- Middleware protege rotas autenticadas
+- Service role key nunca exposição no cliente
+- Validação de propriedade em cada operação
+
+## 📖 Documentação
+
+- `docs/SETUP_PRODUCTION.md` - Guia passo a passo de produção
+- `docs/modules.md` - Detalhes dos módulos
+- Supabase Docs: https://supabase.com/docs
+- Next.js Docs: https://nextjs.org/docs
