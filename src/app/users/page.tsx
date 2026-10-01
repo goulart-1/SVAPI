@@ -1,0 +1,5 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+type Profile = { id: string; full_name: string | null; role: string }
+export default function UsersPage() { const [profile, setProfile] = useState<Profile | null>(null); const [name, setName] = useState(''); const [message, setMessage] = useState(''); useEffect(() => { fetch('/api/users').then(r => r.json()).then(({ data }) => { setProfile(data); setName(data?.full_name || '') }) }, []); async function save(event: React.FormEvent) { event.preventDefault(); const response = await fetch('/api/users', { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ full_name: name }) }); setMessage(response.ok ? 'Perfil atualizado.' : 'Não foi possível atualizar o perfil.') } return <main className="container"><a href="/dashboard">← Dashboard</a><h1>Usuário</h1><p>Gerencie seu perfil e permissões da conta.</p>{profile && <form onSubmit={save} className="auth-card"><label>Nome completo<input value={name} onChange={e => setName(e.target.value)} /></label><p>Perfil: <strong>{profile.role}</strong></p><button type="submit">Salvar</button>{message && <p>{message}</p>}</form>}</main> }
